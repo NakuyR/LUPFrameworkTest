@@ -20,12 +20,7 @@ public class DataManager : Singleton<DataManager>
         print(data);
     }
 
-    public void SaveDatas()
-    {
-
-    }
-
-    public void LoadDatas()
+    public void LoadData<T>()
     {
 
     }
