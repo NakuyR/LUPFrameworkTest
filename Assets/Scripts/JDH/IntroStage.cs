@@ -1,6 +1,7 @@
 ﻿using Manager;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -13,19 +14,33 @@ namespace Manager
         public VideoPlayer videoplayer;
         public VideoClip clip;
         public Slider videoVolume;
+        public AudioSource audioSource;
         void SetVideoClip(VideoClip clip)
         {
             videoplayer.clip = clip;
+            videoplayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+
+            // 첫 번째 오디오 트랙을 활성화 (보통 0번이 기본 트랙)
+            videoplayer.EnableAudioTrack(0, true);
+            videoplayer.SetDirectAudioMute(0, false);
+
+            // AudioSource 연결
+            videoplayer.SetTargetAudioSource(0, audioSource);
+
+            // 초기 볼륨 적용
+            audioSource.volume = videoVolume.value;
         }
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
+            videoVolume.onValueChanged.AddListener(SetVideoVolume);
             onStageEnter();
         }
 
         private void Update()
         {
-            videoVolume.onValueChanged.AddListener(SetVideoVolume);
+            
         }
 
         public override void onStageEnter()
@@ -44,6 +59,7 @@ namespace Manager
         void OnResourceLoaded()
         {
             SetVideoClip(clip);
+
             videoplayer.Play();
         }
 
@@ -51,6 +67,7 @@ namespace Manager
         {
             Debug.LogFormat("VideoVolume : {0}", value);
             videoplayer.SetDirectAudioVolume(0,value);
+            audioSource.volume = videoVolume.value;
         }
     }
 }

@@ -8,6 +8,14 @@ namespace Manager
     {
         Sample,
     }
+    public enum SoundBGMResourceType
+    {
+        Sample,
+    }
+    public enum SoundSFXResourceType
+    {
+        Sample,
+    }
     public class ResourceManager : Singleton<ResourceManager>
     {
         private static Dictionary<string, Object> _cache = new();
@@ -29,6 +37,32 @@ namespace Manager
                     break;
             }
             return videoClip;
+        }
+
+        public AudioSource LoadAudioBGM(SoundBGMResourceType type)
+        {
+            AudioSource audioSource = null;
+            //string path = "VideoClip/";
+            switch (type)
+            {
+                case SoundBGMResourceType.Sample:
+                    audioSource = LoadResource<AudioSource>("BGM/SampleBGM");
+                    break;
+            }
+            return audioSource;
+        }
+
+        public AudioSource LoadAudioSFX(SoundSFXResourceType type)
+        {
+            AudioSource audioSource = null;
+            //string path = "VideoClip/";
+            switch (type)
+            {
+                case SoundSFXResourceType.Sample:
+                    audioSource = LoadResource<AudioSource>("SFX/SampleBGM");
+                    break;
+            }
+            return audioSource;
         }
     }
 }
