@@ -29,6 +29,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JDH/SLGSampleStage.unity
     guid: f4f1ac332e206584db3478e3d95bbc65
+  - enabled: 1
+    path: Assets/Scenes/KHJ/DebugScene.unity
+    guid: e225692e5c12bf14d868b8b0e7d9cd09
+  - enabled: 1
+    path: Assets/Scenes/KHJ/IntroScene.unity
+    guid: 788bf97aaf39e5443b26eb342b5f1689
+  - enabled: 1
+    path: Assets/Scenes/KHJ/LoadingScene.unity
+    guid: 8efd1b3aaf08f0c4397f8f1388c6d423
+  - enabled: 1
+    path: Assets/Scenes/KHJ/MainScene.unity
+    guid: 8cd5143728ee34b41b5c6ef46421a916
+  - enabled: 1
+    path: Assets/Scenes/KHJ/RoguelikeScene.unity
+    guid: 4c3f6402c07fbee43beda8c13f44cede
+  - enabled: 1
+    path: Assets/Scenes/KHJ/SampleScene.unity
+    guid: c268e0fd5a18f584c9b9fd6f54113069
+  - enabled: 1
+    path: Assets/Scenes/KHJ/ShootingScene.unity
+    guid: 86633a4bc5b545c4d9bcca0afcdd3d2d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
