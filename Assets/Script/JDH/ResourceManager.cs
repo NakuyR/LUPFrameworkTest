@@ -22,6 +22,7 @@ namespace Manager
         public VideoClip LoadVideoClip(VideoResourceType type)
         {
             VideoClip videoClip = null;
+            //string path = "VideoClip/";
             switch (type) { 
             case VideoResourceType.Sample:
                     videoClip = LoadResource<VideoClip>("VideoClip/SampleVideo");

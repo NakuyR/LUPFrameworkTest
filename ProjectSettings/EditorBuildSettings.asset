@@ -6,28 +6,28 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainStage.unity
+    path: Assets/Scenes/JDH/MainStage.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/BuildSampleStage.unity
+    path: Assets/Scenes/JDH/BuildSampleStage.unity
     guid: 231e44d376864ac4b9b98690c0be2701
   - enabled: 1
-    path: Assets/Scenes/DebugStage.unity
+    path: Assets/Scenes/JDH/DebugStage.unity
     guid: 8dd7383c9bd227840a097f1f1003a3d8
   - enabled: 1
-    path: Assets/Scenes/ExtractionShooterSampleStage.unity
+    path: Assets/Scenes/JDH/ExtractionShooterSampleStage.unity
     guid: d473d75413519b14e8e97c35422889b6
   - enabled: 1
-    path: Assets/Scenes/RoguelikeSampleStage.unity
+    path: Assets/Scenes/JDH/RoguelikeSampleStage.unity
     guid: 6406b11a24f2ed24ca2b78934eb25b71
   - enabled: 1
-    path: Assets/Scenes/ShootingSampleStage.unity
+    path: Assets/Scenes/JDH/ShootingSampleStage.unity
     guid: ac3a338f60ee2c341a7880d1509cf193
   - enabled: 1
-    path: Assets/Scenes/IntroStage.unity
+    path: Assets/Scenes/JDH/IntroStage.unity
     guid: bfe6194dfd4d4084ba7b006f35702bb2
   - enabled: 1
-    path: Assets/Scenes/SLGSampleStage.unity
+    path: Assets/Scenes/JDH/SLGSampleStage.unity
     guid: f4f1ac332e206584db3478e3d95bbc65
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
