@@ -4,29 +4,29 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 // 이 클래스만 수정하세요 제발요!!!!!!!!!!!!!!!!
-[System.Serializable]
-public class RoguelikeData
-{
-    public string name;
-    public string description;
-    public string stat;
-    public int gold;
+//[System.Serializable]
+//public class RoguelikeData
+//{
+//    public string name;
+//    public string description;
+//    public string stat;
+//    public int gold;
 
-    public RoguelikeData(string name, string description, string stat, int gold)
-    {
-        this.name = name;
-        this.description = description;
-        this.stat = stat;
-        this.gold = gold;
-    }
-}
+//    public RoguelikeData(string name, string description, string stat, int gold)
+//    {
+//        this.name = name;
+//        this.description = description;
+//        this.stat = stat;
+//        this.gold = gold;
+//    }
+//}
 
 [CreateAssetMenu(fileName = "RoguelikeStaticData", menuName = "Scriptable Objects/RoguelikeStaticData")]
 public class RoguelikeStaticData : BaseStaticData
 {
     protected override string URL => "https://docs.google.com/spreadsheets/d/11yM9l6g4opxVTflwsOVV0nZoIPUQ9VnA0rhkasLEi7I/export?format=csv&gid=2025045110";
 
-    [Header("스프레드시트에서 읽혀져 직렬화 된 오브젝트")][SerializeField] public List<RoguelikeData> DataList = new List<RoguelikeData>();
+    [Header("스프레드시트에서 읽혀져 직렬화 된 오브젝트")][SerializeField] public List<RoguelikeScriptData> DataList = new List<RoguelikeScriptData>();
 
     public override IEnumerator LoadSheet()
     {
@@ -34,7 +34,7 @@ public class RoguelikeStaticData : BaseStaticData
 
         UnityWebRequest www = UnityWebRequest.Get(URL);
         yield return www.SendWebRequest();
-
+        
         Debug.Log($"[RoguelikeStaticData] Request completed. Result: {www.result}");
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -92,7 +92,7 @@ public class RoguelikeStaticData : BaseStaticData
 
                 if (int.TryParse(values[3].Trim(), out int cur))
                 {
-                    DataList.Add(new RoguelikeData(name, desc, stat, cur));
+                    DataList.Add(new RoguelikeScriptData(name, desc, stat, cur));
                     successCount++;
                 }
                 else

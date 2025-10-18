@@ -55,9 +55,9 @@ namespace Manager
             // Manager.ResourceManager.Instance.Load
         }
 
-        public void SaveRuntimeData(ScriptablePlayerData playerData)
+        public void SaveRuntimeData(BaseRuntimeData runtimeData)
         {
-
+            
         }
 
 
