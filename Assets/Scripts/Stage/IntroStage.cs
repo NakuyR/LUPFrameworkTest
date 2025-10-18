@@ -35,7 +35,7 @@ namespace Manager
         {
             audioSource = GetComponent<AudioSource>();
             videoVolume.onValueChanged.AddListener(SetVideoVolume);
-            onStageEnter();
+            OnStageEnter();
         }
 
         private void Update()
@@ -43,9 +43,9 @@ namespace Manager
             
         }
 
-        public override void onStageEnter()
+        public override void OnStageEnter()
         {
-            base.onStageEnter();
+            base.OnStageEnter();
 
             LoadResource();
         }

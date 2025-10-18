@@ -5,12 +5,12 @@ namespace Manager
 {
     public class DebugStage : BaseStage
     {
-        public StageGameType TargetStage = StageGameType.MAX;
+        public StageKind TargetStage = StageKind.Main;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            StageManager.Instance.loadStage(stageType,TargetStage);
+            StageManager.Instance.LoadStage(TargetStage);
         }
     }
 }

@@ -3,13 +3,13 @@ using UnityEngine.SceneManagement;
 
 namespace Manager
 {
-    public class BaseStage : MonoBehaviour
+    public abstract class BaseStage : MonoBehaviour
     {
-        public StageGameType stageType = StageGameType.MAX;
+        public StageKind StageKind = StageKind.Main;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
         {
-            StageManager.Instance.addObserver(this);
+
         }
 
         // Update is called once per frame
@@ -18,49 +18,49 @@ namespace Manager
 
         }
 
+        //@TODO 인자값 int로 수정
         public virtual void LoadStage(string stage)
         {
-            StageGameType endStageType = stageType;
+            StageKind endStageKind = StageKind;
             switch (stage)
             {
                 case "Debug":
-                    endStageType = StageGameType.Debug;
+                    endStageKind = StageKind.Debug;
                     break;
                 case "Main":
-                    endStageType = StageGameType.Main;
+                    endStageKind = StageKind.Main;
                     break;
                 case "Intro":
-                    endStageType = StageGameType.Intro;
+                    endStageKind = StageKind.Intro;
                     break;
                 case "Roguelike":
-                    endStageType = StageGameType.Roguelike;
+                    endStageKind = StageKind.Roguelike;
                     break;
                 case "Shooting":
-                    endStageType = StageGameType.Shooting;
+                    endStageKind = StageKind.Shooting;
                     break;
                 case "ExtractionShooter":
-                    endStageType = StageGameType.ExtractionShooter;
+                    endStageKind = StageKind.ExtractionShooter;
                     break;
                 case "Build":
-                    endStageType = StageGameType.Build;
+                    endStageKind = StageKind.Production;
                     break;
                 case "SLG":
-                    endStageType = StageGameType.SLG;
+                    endStageKind = StageKind.DeckStrategy;
                     break;
             }
-            StageManager.Instance.loadStage(stageType, endStageType);
+            StageManager.Instance.LoadStage(endStageKind);
         }
 
-        public virtual void onStageEnter()
+        public virtual void OnStageEnter()
         {
         }
-        public virtual void onStageStay()
+        public virtual void OnStageStay()
         {
         }
 
-        public virtual void onStageExit()
+        public virtual void OnStageExit()
         {
-            StageManager.Instance.removeObserver(this);
         }
     }
 }

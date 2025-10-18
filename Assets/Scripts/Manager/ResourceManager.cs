@@ -33,6 +33,7 @@ namespace Manager
             //string path = "VideoClip/";
             switch (type) { 
             case VideoResourceType.Sample:
+                    //videoClip = LoadResource<VideoClip>(path+"/SampleVideo");
                     videoClip = LoadResource<VideoClip>("VideoClip/SampleVideo");
                     break;
             }
