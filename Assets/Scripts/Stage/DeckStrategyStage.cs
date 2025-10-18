@@ -6,13 +6,8 @@ using UnityEngine.Video;
 using System.Collections;
 namespace Manager
 {
-    public class MainStage : BaseStage
+    public class DeckStrategyStage : BaseStage
     {
-
-        public AudioSource SFX;
-        public AudioSource BGM;
-        public float soundVolume= 0;
-        public Slider slider;
         protected override void Awake() 
         {
             base.Awake();
@@ -20,7 +15,7 @@ namespace Manager
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            slider.onValueChanged.AddListener(SetAudioVolume);
+
         }
 
         // Update is called once per frame
@@ -32,9 +27,8 @@ namespace Manager
         public override IEnumerator OnStageEnter()
         {
             base.OnStageEnter();
-            StageKind = StageKind.Main;
             //구현부
-
+            StageKind = StageKind.DeckStrategy;
 
             return null;
         }
@@ -60,13 +54,6 @@ namespace Manager
         protected override void GetDatas()
         {
             //data = GetData...
-        }
-
-        void SetAudioVolume(float value)
-        {
-            Debug.LogFormat("VideoVolume : {0}", value);
-            SFX.volume = slider.value;
-            BGM.volume = slider.value;
         }
     }
 }

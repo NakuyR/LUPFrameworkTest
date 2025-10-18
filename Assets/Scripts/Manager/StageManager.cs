@@ -211,11 +211,7 @@ namespace Manager
             isTransitioning = true;
 
             // Stage Exit 처리
-            if (currentStageInstance)
-                currentStageInstance.OnStageExit();
-
-            // FadeOut은 항상 실행
-            yield return StartCoroutine(FadeOut());
+            yield return StartCoroutine(OnStageExit());
 
             // 4. Scene 로드
             string sceneName = sceneNameMap.ContainsKey(targetStage)
@@ -249,10 +245,7 @@ namespace Manager
 
             currentStageInstance = FindFirstObjectByType<BaseStage>();
 
-            if (currentStageInstance)
-                currentStageInstance.OnStageEnter();
-
-            yield return StartCoroutine(FadeIn());
+            yield return StartCoroutine(OnStageEnter());
 
             currentStage = targetStage;
             isTransitioning = false;
@@ -300,6 +293,23 @@ namespace Manager
             fadeCanvas.blocksRaycasts = false;
             Debug.Log($"FadeIn End - Alpha: {fadeCanvas.alpha}, Active: {fadeCanvas.gameObject.activeSelf}");
         }
-    }
 
+        private IEnumerator OnStageEnter()
+        {
+            if (currentStageInstance)
+            {
+                yield return StartCoroutine(currentStageInstance.OnStageEnter());
+            }
+            yield return StartCoroutine(FadeIn());
+        }
+
+        private IEnumerator OnStageExit()
+        {
+            if (currentStageInstance)
+            {
+                yield return StartCoroutine(currentStageInstance.OnStageExit());
+            }
+            yield return StartCoroutine(FadeOut());
+        }
+    }
 }

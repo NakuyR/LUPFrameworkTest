@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Manager
 {
     public abstract class BaseStage : MonoBehaviour
     {
         public StageKind StageKind = StageKind.Main;
+        //private List<RuntimeData> datas;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
         {
@@ -19,48 +23,73 @@ namespace Manager
         }
 
         //@TODO 인자값 int로 수정
-        public virtual void LoadStage(string stage)
+        public void LoadStage(int stage)
         {
             StageKind endStageKind = StageKind;
             switch (stage)
             {
-                case "Debug":
+                case 1:
                     endStageKind = StageKind.Debug;
                     break;
-                case "Main":
+                case 2:
                     endStageKind = StageKind.Main;
                     break;
-                case "Intro":
+                case 3:
                     endStageKind = StageKind.Intro;
                     break;
-                case "Roguelike":
+                case 4:
                     endStageKind = StageKind.Roguelike;
                     break;
-                case "Shooting":
+                case 5:
                     endStageKind = StageKind.Shooting;
                     break;
-                case "ExtractionShooter":
+                case 6:
                     endStageKind = StageKind.ExtractionShooter;
                     break;
-                case "Build":
+                case 7:
                     endStageKind = StageKind.Production;
                     break;
-                case "SLG":
+                case 8:
                     endStageKind = StageKind.DeckStrategy;
                     break;
             }
             StageManager.Instance.LoadStage(endStageKind);
         }
+        protected abstract void LoadResources();
 
-        public virtual void OnStageEnter()
+        protected abstract void GetDatas();
+
+        public virtual IEnumerator OnStageEnter()
         {
+            LoadResources();
+            GetDatas();
+            yield return null;
         }
-        public virtual void OnStageStay()
+        public virtual IEnumerator OnStageStay()
         {
+            yield return null;
         }
 
-        public virtual void OnStageExit()
+        public virtual IEnumerator OnStageExit()
         {
+            SaveDatas();
+            yield return null;
+        }
+
+        //RuntimeData GetData(RuntimeDataKind data)
+        protected virtual void GetData()
+        {
+            //RuntimeData data = DataManager.Instance.GetRuntimeData();
+            //datas.Add(data);
+            //return data;
+        }
+
+        private void SaveDatas()
+        {
+            //foreach(RuntimeData data in datas)
+            //{
+            //    DataManager.Instance.SaveData(data);
+            //}
         }
     }
 }

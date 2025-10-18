@@ -12,6 +12,15 @@ namespace Manager
         {
             StageManager.Instance.LoadStage(TargetStage);
         }
+        protected override void LoadResources()
+        {
+            //resource = ResourceManager.Instance.Load...
+        }
+
+        protected override void GetDatas()
+        {
+            //data = DataManager.Instance.GetData...
+        }
     }
 }
 

@@ -1,5 +1,8 @@
 ﻿using Manager;
 using System.IO;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
@@ -35,7 +38,6 @@ namespace Manager
         {
             audioSource = GetComponent<AudioSource>();
             videoVolume.onValueChanged.AddListener(SetVideoVolume);
-            OnStageEnter();
         }
 
         private void Update()
@@ -43,31 +45,33 @@ namespace Manager
             
         }
 
-        public override void OnStageEnter()
+        public override IEnumerator OnStageEnter()
         {
             base.OnStageEnter();
+            StageKind = StageKind.Intro;
 
-            LoadResource();
-        }
-        void LoadResource()
-        {
-            clip = ResourceManager.Instance.LoadVideoClip(VideoResourceType.Sample);
-
-            OnResourceLoaded();
-        }
-
-        void OnResourceLoaded()
-        {
             SetVideoClip(clip);
-
             videoplayer.Play();
+            return null;
         }
+
 
         void SetVideoVolume(float value)
         {
             Debug.LogFormat("VideoVolume : {0}", value);
             videoplayer.SetDirectAudioVolume(0,value);
             audioSource.volume = videoVolume.value;
+        }
+
+        protected override void LoadResources()
+        {
+            clip = ResourceManager.Instance.LoadVideoClip(VideoResourceType.Sample);
+            //resource = ResourceManager.Instance.Load...
+        }
+
+        protected override void GetDatas()
+        {
+            //data = DataManager.Instance.GetData...
         }
     }
 }
