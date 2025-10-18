@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2983d2e1c214b2842a4b3854cbbfc525, type: 3}
+  m_Script: {fileID: 11500000, guid: 7354988af93136247b7563d2084f9249, type: 3}
   m_Name: ScriptablePlayerData
   m_EditorClassIdentifier: 
+  level: 0
   soundVolume: 0
-  playerLevel: 0
-  gold: 0

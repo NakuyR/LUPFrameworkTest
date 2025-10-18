@@ -4,11 +4,8 @@
 public class ScriptablePlayerData : ScriptableObject
 {
     [SerializeField]
-    public float soundVolume;
+    float level;
 
     [SerializeField]
-    public float playerLevel;
-
-    [SerializeField]
-    public float gold;
+    float soundVolume;
 }

@@ -1,27 +1,68 @@
-﻿using UnityEngine;
-using UnityEngine.Networking;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
+using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UIElements;
+
 
 public class DataManager : Singleton<DataManager>
 {
-    // Shooting 시트
-    const string ShootingURL = "https://docs.google.com/spreadsheets/d/11yM9l6g4opxVTflwsOVV0nZoIPUQ9VnA0rhkasLEi7I/export?format=csv";
+    [SerializeField]
+    ScriptablePlayerData data;
 
-    // Roguelike 시트
-    const string LikeURL = "https://docs.google.com/spreadsheets/d/11yM9l6g4opxVTflwsOVV0nZoIPUQ9VnA0rhkasLEi7I/export?format=csv&gid=2025045110#gid=2025045110";
-   
-    IEnumerator Start()
+     //private T GetStaticData<T>(Manager.StageGameType type)
+     //{
+     //   T data;
+
+     //   switch (type)
+     //   {
+     //       case Manager.StageGameType.Shooting:
+     //           //data = Manager.ResourceManager.Instance.Load ~~~~
+     //           //return data; 
+     //           break;
+     //       case Manager.StageGameType.SLG:
+     //           //data = Manager.ResourceManager.Instance.Load ~~~~
+     //           //return data;
+     //           break;
+     //       case Manager.StageGameType.ExtractionShooter:
+     //           //data = Manager.ResourceManager.Instance.Load ~~~~
+     //           //return data;
+     //           break;
+     //       case Manager.StageGameType.Roguelike:
+     //          // data = Manager.ResourceManager.Instance.Load ~~~~
+     //           return data;
+     //           break;
+     //       case Manager.StageGameType.Build:
+     //           //data = Manager.ResourceManager.Instance.Load ~~~~
+     //           return data;
+     //           break;
+     //   }
+     //   //return null;
+     //}
+
+    public ScriptablePlayerData GetRuntimeData()
     {
-        UnityWebRequest www = UnityWebRequest.Get(LikeURL);
-        yield return www.SendWebRequest();
-
-        string data = www.downloadHandler.text;
-        print(data);
+        return null;
     }
 
-    public void LoadData<T>()
+    protected override void Awake()
     {
+        base.Awake();
+
+        // Manager.ResourceManager.Instance.Load
+    }
+
+    public void SaveRuntimeData(ScriptablePlayerData playerData)
+    {
+
+    }
+
+
+    public void LoadData()
+    {
+        // Manager.ResourceManager.~~~
 
     }
 }
