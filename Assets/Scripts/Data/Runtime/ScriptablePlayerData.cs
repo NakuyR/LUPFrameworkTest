@@ -13,4 +13,9 @@ public class ScriptablePlayerData : BaseRuntimeData
     {
         //
     }
+
+    public override void SaveData()
+    {
+        //
+    }   
 }

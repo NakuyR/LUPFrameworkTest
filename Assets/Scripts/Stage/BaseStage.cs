@@ -1,4 +1,12 @@
+<<<<<<< Updated upstream
 ﻿using UnityEngine;
+=======
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+>>>>>>> Stashed changes
 using UnityEngine.SceneManagement;
 
 namespace Manager
@@ -6,7 +14,13 @@ namespace Manager
     public abstract class BaseStage : MonoBehaviour
     {
         public StageKind StageKind = StageKind.Main;
+<<<<<<< Updated upstream
         // Start is called once before the first execution of Update after the MonoBehaviour is created
+=======
+
+        public BaseStaticData staticData;
+       
+>>>>>>> Stashed changes
         protected virtual void Awake()
         {
 
@@ -52,8 +66,23 @@ namespace Manager
             StageManager.Instance.LoadStage(endStageKind);
         }
 
+<<<<<<< Updated upstream
         public virtual void OnStageEnter()
         {
+=======
+        protected BaseStaticData GetDatas(BaseStage stage)
+        {
+            BaseStaticData staticData = DataManager.Instance.GetDatas(stage);
+
+            return staticData;
+        }
+
+        public virtual IEnumerator OnStageEnter()
+        {
+            LoadResources();
+            staticData = GetDatas(this);
+            yield return null;
+>>>>>>> Stashed changes
         }
         public virtual void OnStageStay()
         {

@@ -2,22 +2,84 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Networking;
 
 [CreateAssetMenu(fileName = "BaseStaticData", menuName = "Scriptable Objects/BaseStaticData")]
 public abstract class BaseStaticData : ScriptableObject
 {
-    // 절 대 수 정 금 지 !
     protected abstract string URL { get; }
+    public abstract List<object> GetDataList();
 
-    
     [Header("스프레드 시트의 시트 이름")][SerializeField] public string associatedWorksheet = "";
-    [Header("읽기 시작할 행 번호")][SerializeField] public int START_ROW_LENGTH = 1;
-    [Header("읽을 마지막 행 번호")][SerializeField] public int END_ROW_LENGTH = -1;
+    [Header("읽기 시작할 행 번호")][SerializeField] public int START_ROW = 1;
 
     public abstract IEnumerator LoadSheet();
 
-    protected abstract void ParseSheet(string csvData);
+    // 각 자식 클래스가 구현해야 할 메서드들
+    protected abstract object ParseDataRow(string[] values);
+    protected abstract void ClearDataList();
+    protected abstract void AddToDataList(object data);
+
+    protected void ParseSheet(string csvData)
+    {
+        Debug.Log($"[{GetType().Name}] ParseSheet called with {csvData.Length} chars");
+
+        string[] lines = csvData.Split('\n');
+        Debug.Log($"[{GetType().Name}] Split into {lines.Length} lines");
+
+        if (lines.Length < 2)
+        {
+            Debug.LogWarning($"[{GetType().Name}] Not enough lines in CSV (need at least 2)");
+            return;
+        }
+
+        string[] headers = lines[0].Split(',');
+        Debug.Log($"[{GetType().Name}] Headers: {string.Join(", ", headers)}");
+
+        for (int i = 0; i < headers.Length; i++)
+            headers[i] = headers[i].Trim();
+
+        ClearDataList();
+
+        int successCount = 0;
+        int failCount = 0;
+
+        for (int i = START_ROW; i < lines.Length; i++)
+        {
+            if (string.IsNullOrWhiteSpace(lines[i]))
+                continue;
+
+            string[] values = lines[i].Split(',');
+
+            if (values.Length >= 4)
+            {
+                try
+                {
+                    object data = ParseDataRow(values);
+                    if (data != null)
+                    {
+                        AddToDataList(data);
+                        successCount++;
+                    }
+                    else
+                    {
+                        failCount++;
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogWarning($"[{GetType().Name}] Failed to parse line {i}: {e.Message}");
+                    failCount++;
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"[{GetType().Name}] Line {i} has only {values.Length} values (need 4)");
+                failCount++;
+            }
+        }
+
+        Debug.Log($"[{GetType().Name}] Loaded {GetDataList().Count} entries (Success: {successCount}, Failed: {failCount})");
+    }
 }
 
 #if UNITY_EDITOR

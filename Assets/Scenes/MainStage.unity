@@ -1419,6 +1419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46029aeb4a30c9e4b867f6ee82f8bf18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeDuration: 1
+  currentStage: 0
 --- !u!4 &665181593
 Transform:
   m_ObjectHideFlags: 0
@@ -1627,7 +1629,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b525a458c2f07bb42aaae9d4f257ba1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageType: 1
+  StageKind: 2
+  test: {fileID: 11400000, guid: a3ea81b71d20ca245966a650a92d102a, type: 2}
+  SFX: {fileID: 0}
+  BGM: {fileID: 0}
+  soundVolume: 0
+  slider: {fileID: 0}
 --- !u!4 &1005737955
 Transform:
   m_ObjectHideFlags: 0

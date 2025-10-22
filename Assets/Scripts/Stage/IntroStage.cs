@@ -69,6 +69,20 @@ namespace Manager
             videoplayer.SetDirectAudioVolume(0,value);
             audioSource.volume = videoVolume.value;
         }
+<<<<<<< Updated upstream
+=======
+
+        protected override void LoadResources()
+        {
+            clip = ResourceManager.Instance.LoadVideoClip(VideoResourceType.Sample);
+            //resource = ResourceManager.Instance.Load...
+        }
+
+        //protected override void GetDatas()
+        //{
+        //    //data = DataManager.Instance.GetData...
+        //}
+>>>>>>> Stashed changes
     }
 }
 

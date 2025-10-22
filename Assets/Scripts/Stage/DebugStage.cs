@@ -12,6 +12,18 @@ namespace Manager
         {
             StageManager.Instance.LoadStage(TargetStage);
         }
+<<<<<<< Updated upstream
+=======
+        protected override void LoadResources()
+        {
+            //resource = ResourceManager.Instance.Load...
+        }
+
+        //protected override void GetDatas()
+        //{
+        //    //data = DataManager.Instance.GetData...
+        //}
+>>>>>>> Stashed changes
     }
 }
 

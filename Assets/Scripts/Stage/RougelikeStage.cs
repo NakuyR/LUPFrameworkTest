@@ -3,16 +3,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using System.Collections;
 namespace Manager
 {
-    public class MainStage : BaseStage
+    public class RoguelikeStage : BaseStage
     {
-        public BaseRuntimeData test;
-
-        public AudioSource SFX;
-        public AudioSource BGM;
-        public float soundVolume= 0;
-        public Slider slider;
         protected override void Awake() 
         {
             base.Awake();
@@ -20,24 +15,19 @@ namespace Manager
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            //slider.onValueChanged.AddListener(SetAudioVolume);
-            test.SaveData();
+
         }
 
         // Update is called once per frame
         void Update()
         {
-           
+
         }
 
-        public override void LoadStage(string stage)
+        public override IEnumerator OnStageEnter()
         {
-<<<<<<< Updated upstream
-            base.LoadStage(stage);
-        }
-=======
             base.OnStageEnter();
-            StageKind = StageKind.Main;
+            StageKind = StageKind.Roguelike;
             //구현부
 
 
@@ -66,14 +56,6 @@ namespace Manager
         //{
         //    //data = GetData...
         //}
->>>>>>> Stashed changes
-
-        void SetAudioVolume(float value)
-        {
-            Debug.LogFormat("VideoVolume : {0}", value);
-            SFX.volume = slider.value;
-            BGM.volume = slider.value;
-        }
     }
 }
 
