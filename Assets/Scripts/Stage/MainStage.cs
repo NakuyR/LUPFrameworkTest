@@ -4,6 +4,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using System.Collections;
+using System.Data;
 namespace Manager
 {
     public class MainStage : BaseStage
@@ -13,9 +14,11 @@ namespace Manager
         public AudioSource BGM;
         public float soundVolume= 0;
         public Slider slider;
+    
         protected override void Awake() 
         {
             base.Awake();
+            StageKind = StageKind.Main;
         }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -31,26 +34,26 @@ namespace Manager
 
         public override IEnumerator OnStageEnter()
         {
-            base.OnStageEnter();
-            StageKind = StageKind.Main;
+            yield return base.OnStageEnter();
+            
             //구현부
 
 
-            return null;
+            yield return null;
         }
         public override IEnumerator OnStageStay()
         {
-            base.OnStageStay();
+            yield return base.OnStageStay();
             //일단 납두기
-            return null;
+            yield return null;
         }
         public override IEnumerator OnStageExit()
         {
-            base.OnStageExit();
+            yield return base.OnStageExit();
             //구현부
 
 
-            return null;
+            yield return null;
         }
         protected override void LoadResources()
         {
@@ -59,7 +62,7 @@ namespace Manager
 
         protected override void GetDatas()
         {
-            //data = GetData...
+            
         }
 
         void SetAudioVolume(float value)

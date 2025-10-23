@@ -65,6 +65,30 @@ namespace Manager
             }
             return audioSource;
         }
+
+        public BaseStaticData LoadStaticData(StageKind type)
+        {
+            BaseStaticData data = null;
+            switch (type)
+            {
+                case Manager.StageKind.Shooting:
+                    data = Resources.Load<BaseStaticData>("Data/ShootingStaticData");
+                    break;
+                case Manager.StageKind.DeckStrategy:
+                    data = Resources.Load<BaseStaticData>("Data/DeckStrategyStaticData");
+                    break;
+                case Manager.StageKind.ExtractionShooter:
+                    data = Resources.Load<BaseStaticData>("Data/ExtractionShooterStaticData");
+                    break;
+                case Manager.StageKind.Roguelike:
+                    data = Resources.Load<BaseStaticData>("Data/RoguelikeStaticData");
+                    break;
+                case Manager.StageKind.Main:
+                    data = Resources.Load<BaseStaticData>("Data/ProductionStaticData");
+                    break;
+            }
+            return data;
+        }
     }
 }
 

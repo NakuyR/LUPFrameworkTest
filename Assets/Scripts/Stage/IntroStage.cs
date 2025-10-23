@@ -33,7 +33,10 @@ namespace Manager
             // 초기 볼륨 적용
             audioSource.volume = videoVolume.value;
         }
-
+        void Awake()
+        {
+            StageKind = StageKind.Intro;
+        }
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();
@@ -47,12 +50,12 @@ namespace Manager
 
         public override IEnumerator OnStageEnter()
         {
-            base.OnStageEnter();
-            StageKind = StageKind.Intro;
+            yield return base.OnStageEnter();
+            
 
             SetVideoClip(clip);
             videoplayer.Play();
-            return null;
+            yield return null;
         }
 
 

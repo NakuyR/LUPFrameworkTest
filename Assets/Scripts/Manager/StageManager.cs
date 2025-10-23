@@ -44,8 +44,8 @@ namespace Manager
         private BaseStage currentStageInstance;
         private bool isTransitioning = false;
 
-        // Transition 검증용 2차원 배열
-        private bool[,] transitionTable;
+        // Transition 검증용 2차원 리스트
+        private List<List<bool>> transitionTable;
 
         // StageKind → Scene 이름 매핑
         private Dictionary<StageKind, string> sceneNameMap = new Dictionary<StageKind, string>
@@ -129,7 +129,16 @@ namespace Manager
         private void InitializeTransitionTable()
         {
             int stageCount = System.Enum.GetValues(typeof(StageKind)).Length;
-            transitionTable = new bool[stageCount, stageCount];
+            transitionTable = new List<List<bool>>();
+            for (int i = 0; i < stageCount; i++)
+            {
+                List<bool> row = new List<bool>();
+                for (int j = 0; j < stageCount; j++)
+                {
+                    row.Add(false);
+                }
+                transitionTable.Add(row);
+            }
 
             SetTransition(StageKind.Debug, StageKind.Debug);
             SetTransition(StageKind.Debug, StageKind.Intro);
@@ -176,7 +185,7 @@ namespace Manager
 
         private void SetTransition(StageKind from, StageKind to)
         {
-            transitionTable[(int)from, (int)to] = true;
+            transitionTable[(int)from][(int)to] = true;
         }
 
         // Stage 전환 
@@ -202,7 +211,7 @@ namespace Manager
         // Transition 검사
         private bool IsValidTransition(StageKind from, StageKind to)
         {
-            return transitionTable[(int)from, (int)to];
+            return transitionTable[(int)from][(int)to];
         }
 
         /// Stage 전환 Coroutine

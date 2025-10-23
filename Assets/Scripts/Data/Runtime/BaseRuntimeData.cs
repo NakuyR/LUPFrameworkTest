@@ -15,10 +15,5 @@ public abstract class BaseRuntimeData : ScriptableObject
     }
 
     public abstract void ResetData();
-
-    virtual public void SaveData()
-    {
-        AssetDatabase.CreateAsset(this, "Data/" + filename + ".asset");
-        AssetDatabase.SaveAssets();
-    }
+    public abstract void SaveData();
 }

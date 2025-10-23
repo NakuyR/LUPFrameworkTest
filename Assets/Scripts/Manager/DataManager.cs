@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
@@ -11,37 +12,22 @@ namespace Manager
     public class DataManager : Singleton<DataManager>
     {
         [SerializeField]
-        ScriptablePlayerData data;
+        BaseStaticData data;
 
-        //private T GetStaticData<T>(Manager.StageGameType type)
-        //{
-        //   T data;
+        private BaseStaticData GetStaticData(BaseStage stage)
+        {
+            BaseStaticData data = null;
 
-        //   switch (type)
-        //   {
-        //       case Manager.StageGameType.Shooting:
-        //           //data = Manager.ResourceManager.Instance.Load ~~~~
-        //           //return data; 
-        //           break;
-        //       case Manager.StageGameType.SLG:
-        //           //data = Manager.ResourceManager.Instance.Load ~~~~
-        //           //return data;
-        //           break;
-        //       case Manager.StageGameType.ExtractionShooter:
-        //           //data = Manager.ResourceManager.Instance.Load ~~~~
-        //           //return data;
-        //           break;
-        //       case Manager.StageGameType.Roguelike:
-        //          // data = Manager.ResourceManager.Instance.Load ~~~~
-        //           return data;
-        //           break;
-        //       case Manager.StageGameType.Build:
-        //           //data = Manager.ResourceManager.Instance.Load ~~~~
-        //           return data;
-        //           break;
-        //   }
-        //   //return null;
-        //}
+            data = ResourceManager.Instance.LoadStaticData(stage.StageKind);
+
+            if (!data)
+            {
+                Debug.LogError($"Failed to load static data");
+                return null;
+            }
+
+            return data;
+        }
 
         public ScriptablePlayerData GetRuntimeData()
         {
@@ -60,11 +46,12 @@ namespace Manager
             
         }
 
-
-        public void LoadData()
+        public BaseStaticData GetDatas(BaseStage stage)
         {
-            // Manager.ResourceManager.~~~
+            BaseStaticData staticdata = GetStaticData(stage);
+            GetRuntimeData();
 
+            return staticdata;
         }
     }
 }

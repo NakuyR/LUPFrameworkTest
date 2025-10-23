@@ -284,11 +284,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: Main
           m_BoolArgument: 0
@@ -492,11 +492,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: SLG
           m_BoolArgument: 0
@@ -1000,11 +1000,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: Build
           m_BoolArgument: 0
@@ -1133,11 +1133,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: Shooting
           m_BoolArgument: 0
@@ -1571,11 +1571,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: Roguelike
           m_BoolArgument: 0
@@ -2193,11 +2193,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: ExtractionShooter
           m_BoolArgument: 0
@@ -2993,11 +2993,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1005737956}
         m_TargetAssemblyTypeName: Manager.BaseStage, Assembly-CSharp
         m_MethodName: LoadStage
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: Debug
           m_BoolArgument: 0
@@ -3099,7 +3099,7 @@ VideoPlayer:
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 1
   m_TargetAudioSources:
-  - {fileID: 0}
+  - {fileID: 1005737957}
   m_DirectAudioVolumes:
   - 1
   m_Url: 

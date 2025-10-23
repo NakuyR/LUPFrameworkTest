@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0d519f10957164c9ab923a5451f761, type: 3}
   m_Name: RoguelikeRuntimeData
   m_EditorClassIdentifier: 
+  filename: test
