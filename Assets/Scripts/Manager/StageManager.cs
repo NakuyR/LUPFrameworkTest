@@ -131,14 +131,7 @@ namespace Manager
             int stageCount = System.Enum.GetValues(typeof(StageKind)).Length;
             transitionTable = new List<List<bool>>();
             for (int i = 0; i < stageCount; i++)
-            {
-                List<bool> row = new List<bool>();
-                for (int j = 0; j < stageCount; j++)
-                {
-                    row.Add(false);
-                }
-                transitionTable.Add(row);
-            }
+                transitionTable.Add(null); 
 
             SetTransition(StageKind.Debug, StageKind.Debug);
             SetTransition(StageKind.Debug, StageKind.Intro);
@@ -185,7 +178,17 @@ namespace Manager
 
         private void SetTransition(StageKind from, StageKind to)
         {
-            transitionTable[(int)from][(int)to] = true;
+            int fromIndex = (int)from;  
+
+            if (transitionTable[fromIndex] == null)
+                transitionTable[fromIndex] = new List<bool>();
+
+            int toIndex = (int)to;
+
+            while (transitionTable[fromIndex].Count <= toIndex)
+                transitionTable[fromIndex].Add(false);
+
+            transitionTable[fromIndex][toIndex] = true;
         }
 
         // Stage 전환 
@@ -211,7 +214,16 @@ namespace Manager
         // Transition 검사
         private bool IsValidTransition(StageKind from, StageKind to)
         {
-            return transitionTable[(int)from][(int)to];
+            int fromIndex = (int)from;
+            int toIndex = (int)to;
+
+            if (transitionTable[fromIndex] == null)
+                return false;  
+
+            if (transitionTable[fromIndex].Count <= toIndex)
+                return false;  
+
+            return transitionTable[fromIndex][toIndex];
         }
 
         /// Stage 전환 Coroutine

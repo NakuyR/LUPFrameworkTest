@@ -57,7 +57,7 @@ namespace Manager
 
         protected override void GetDatas()
         {
-            data = Manager.DataManager.Instance.GetDatas(this);
+            data = base.GetStaticData(this);
         }
     }
 }
