@@ -14,11 +14,11 @@ namespace Manager
         [SerializeField]
         BaseStaticData data;
 
-        public BaseStaticData GetStaticData(BaseStage stage)
+        public BaseStaticData GetStaticData(StageKind stagekind, int stagetype)
         {
             BaseStaticData data = null;
 
-            data = ResourceManager.Instance.LoadStaticData(stage.StageKind);
+            data = ResourceManager.Instance.LoadStaticData(stagekind, stagetype);
 
             if (!data)
             {

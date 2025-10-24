@@ -66,7 +66,7 @@ namespace Manager
             return audioClip;
         }
 
-        public BaseStaticData LoadStaticData(StageKind type)
+        public BaseStaticData LoadStaticData(StageKind type, int stagetype)
         {
             BaseStaticData data = null;
             switch (type)
