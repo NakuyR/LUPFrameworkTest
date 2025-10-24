@@ -10,6 +10,8 @@ namespace Manager
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            //StageManager.Instance.currentStage = this;
+
             StageManager.Instance.LoadStage(TargetStage);
         }
         protected override void LoadResources()

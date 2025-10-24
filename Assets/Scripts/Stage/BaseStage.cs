@@ -9,8 +9,7 @@ namespace Manager
     public abstract class BaseStage : MonoBehaviour
     {
         public StageKind StageKind = StageKind.Main;
-        //private List<RuntimeData> datas;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         protected virtual void Awake()
         {
 
@@ -22,37 +21,20 @@ namespace Manager
 
         }
 
-        //@TODO 인자값 int로 수정
+        /*
+        UnKnown = 0,    // 이상한 씬
+        Debug = 1,      // 디버그 씬 (개발용)
+        Main = 2,       // 메인 화면
+        Intro = 3,      // 인트로
+        Roguelike = 4,  // 로그라이크
+        Shooting = 5,   // 슈팅
+        ExtractionShooter = 6, // 익스트랙션 슈터
+        Production = 7,  // 생산/건설/강화
+        DeckStrategy = 8, // 덱 전략
+         */
         public void LoadStage(int stage)
         {
-            StageKind endStageKind = StageKind;
-            switch (stage)
-            {
-                case 1:
-                    endStageKind = StageKind.Debug;
-                    break;
-                case 2:
-                    endStageKind = StageKind.Main;
-                    break;
-                case 3:
-                    endStageKind = StageKind.Intro;
-                    break;
-                case 4:
-                    endStageKind = StageKind.Roguelike;
-                    break;
-                case 5:
-                    endStageKind = StageKind.Shooting;
-                    break;
-                case 6:
-                    endStageKind = StageKind.ExtractionShooter;
-                    break;
-                case 7:
-                    endStageKind = StageKind.Production;
-                    break;
-                case 8:
-                    endStageKind = StageKind.DeckStrategy;
-                    break;
-            }
+            StageKind endStageKind = (StageKind)stage;
             StageManager.Instance.LoadStage(endStageKind);
         }
         protected abstract void LoadResources();
@@ -74,14 +56,6 @@ namespace Manager
         {
             SaveDatas();
             yield return null;
-        }
-
-        //RuntimeData GetData(RuntimeDataKind data)
-        protected virtual void GetData()
-        {
-            //RuntimeData data = DataManager.Instance.GetRuntimeData();
-            //datas.Add(data);
-            //return data;
         }
 
         private void SaveDatas()

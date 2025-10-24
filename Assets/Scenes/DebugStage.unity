@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 1
-  currentStage: 0
+  currentStage: 1
 --- !u!4 &669508849
 Transform:
   m_ObjectHideFlags: 0
@@ -253,8 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644e4f16546549444850c6296045a889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageKind: 0
-  TargetStage: 3
+  StageKind: 1
+  TargetStage: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

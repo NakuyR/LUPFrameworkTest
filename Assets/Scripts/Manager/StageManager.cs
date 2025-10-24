@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,14 +17,15 @@ namespace Manager
 
     public enum StageKind
     {
-        Debug,      // 디버그 씬 (개발용)
-        Intro,      // 인트로
-        Main,       // 메인 화면
-        Roguelike,  // 로그라이크
-        Shooting,   // 슈팅
-        DeckStrategy, // 덱 전략
-        ExtractionShooter, // 익스트랙션 슈터
-        Production  // 생산/건설/강화
+        UnKnown = 0,
+        Debug = 1,      // 디버그 씬 (개발용)
+        Main = 2,       // 메인 화면
+        Intro = 3,      // 인트로
+        Roguelike = 4,  // 로그라이크
+        Shooting = 5,   // 슈팅
+        ExtractionShooter = 6, // 익스트랙션 슈터
+        Production = 7,  // 생산/건설/강화
+        DeckStrategy = 8, // 덱 전략
     }
 
     [Serializable]
