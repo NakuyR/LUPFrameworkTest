@@ -65,6 +65,22 @@ namespace Manager
             //    DataManager.Instance.SaveData(data);
             //}
         }
+
+        protected BaseStaticData GetStaticData(BaseStage stage)
+        {
+            BaseStaticData data = null;
+
+            data = Manager.DataManager.Instance.GetStaticData(stage);
+
+            return data;
+        }
+
+        protected BaseStaticData GetRuntimeData(BaseStage stage)
+        {
+            // 추후 구현
+
+            return null;
+        }
     }
 }
 

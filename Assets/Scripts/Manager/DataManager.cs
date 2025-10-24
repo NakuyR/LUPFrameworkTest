@@ -14,7 +14,7 @@ namespace Manager
         [SerializeField]
         BaseStaticData data;
 
-        private BaseStaticData GetStaticData(BaseStage stage)
+        public BaseStaticData GetStaticData(BaseStage stage)
         {
             BaseStaticData data = null;
 
@@ -44,14 +44,6 @@ namespace Manager
         public void SaveRuntimeData(BaseRuntimeData runtimeData)
         {
             
-        }
-
-        public BaseStaticData GetDatas(BaseStage stage)
-        {
-            BaseStaticData staticdata = GetStaticData(stage);
-            GetRuntimeData();
-
-            return staticdata;
         }
     }
 }
