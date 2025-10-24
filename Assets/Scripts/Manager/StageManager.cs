@@ -31,6 +31,8 @@ namespace Manager
     [Serializable]
     public class StageTransition
     {
+        // public Define.StageKind start;
+        // public Define.StageKind end;
         public StageKind start;
         public StageKind end;
     }

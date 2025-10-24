@@ -70,7 +70,7 @@ namespace Manager
         {
             BaseStaticData data = null;
 
-            data = Manager.DataManager.Instance.GetStaticData(stage);
+            data = Manager.DataManager.Instance.GetStaticData(stage.StageKind, (int)Define.StageType.Lobby);
 
             return data;
         }
