@@ -1299,6 +1299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageKind: 3
   data: {fileID: 0}
+  TestCharacter: {fileID: 1734020675187664998, guid: bcb28e45a004b194faa5a4aa5de4310a, type: 3}
 --- !u!1 &1061068830
 GameObject:
   m_ObjectHideFlags: 0

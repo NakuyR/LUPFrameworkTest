@@ -354,5 +354,10 @@ namespace Manager
             }
             yield return StartCoroutine(FadeOut());
         }
+
+        public BaseStage GetCurrentStage()
+        {
+            return currentStageInstance;
+        }
     }
 }

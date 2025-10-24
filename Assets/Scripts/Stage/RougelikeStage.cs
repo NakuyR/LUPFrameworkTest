@@ -9,7 +9,7 @@ namespace Manager
     public class RoguelikeStage : BaseStage
     {
         public BaseStaticData data;
-
+        public GameObject TestCharacter;
         protected override void Awake() 
         {
             base.Awake();
@@ -32,7 +32,7 @@ namespace Manager
             yield return base.OnStageEnter();
             
             //구현부
-
+            Instantiate(TestCharacter);
 
             yield return null;
         }
@@ -59,6 +59,7 @@ namespace Manager
         {
             data = base.GetStaticData(this);
         }
+
     }
 }
 
