@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,14 +17,15 @@ namespace Manager
 
     public enum StageKind
     {
-        Debug,      // 디버그 씬 (개발용)
-        Intro,      // 인트로
-        Main,       // 메인 화면
-        Roguelike,  // 로그라이크
-        Shooting,   // 슈팅
-        DeckStrategy, // 덱 전략
-        ExtractionShooter, // 익스트랙션 슈터
-        Production  // 생산/건설/강화
+        UnKnown = 0,
+        Debug = 1,      // 디버그 씬 (개발용)
+        Main = 2,       // 메인 화면
+        Intro = 3,      // 인트로
+        Roguelike = 4,  // 로그라이크
+        Shooting = 5,   // 슈팅
+        ExtractionShooter = 6, // 익스트랙션 슈터
+        Production = 7,  // 생산/건설/강화
+        DeckStrategy = 8, // 덱 전략
     }
 
     [Serializable]
@@ -45,7 +47,7 @@ namespace Manager
         private bool isTransitioning = false;
 
         // Transition 검증용 2차원 리스트
-        private List<List<bool>> transitionTable;
+        private List<List<StageKind>> transitionTable = new List<List<StageKind>>();
 
         // StageKind → Scene 이름 매핑
         private Dictionary<StageKind, string> sceneNameMap = new Dictionary<StageKind, string>
@@ -128,67 +130,93 @@ namespace Manager
         // Transition 테이블 초기화
         private void InitializeTransitionTable()
         {
-            int stageCount = System.Enum.GetValues(typeof(StageKind)).Length;
-            transitionTable = new List<List<bool>>();
-            for (int i = 0; i < stageCount; i++)
-                transitionTable.Add(null); 
+            List<StageKind> Transition = new List<StageKind>();
 
-            SetTransition(StageKind.Debug, StageKind.Debug);
-            SetTransition(StageKind.Debug, StageKind.Intro);
-            SetTransition(StageKind.Debug, StageKind.Main);
-            SetTransition(StageKind.Debug, StageKind.Roguelike);
-            SetTransition(StageKind.Debug, StageKind.Shooting);
-            SetTransition(StageKind.Debug, StageKind.DeckStrategy);
-            SetTransition(StageKind.Debug, StageKind.ExtractionShooter);
-            SetTransition(StageKind.Debug, StageKind.Production);
+            // Debug
+            SetTransition(Transition, StageKind.Debug);
+            SetTransition(Transition, StageKind.Intro);
+            SetTransition(Transition, StageKind.Main);
+            SetTransition(Transition, StageKind.Roguelike);
+            SetTransition(Transition, StageKind.Shooting);
+            SetTransition(Transition, StageKind.DeckStrategy);
+            SetTransition(Transition, StageKind.ExtractionShooter);
+            SetTransition(Transition, StageKind.Production);
 
-            SetTransition(StageKind.Intro, StageKind.Main);
+            AddTransitionToList(Transition);
+            Transition.Clear();
 
-            SetTransition(StageKind.Main, StageKind.Roguelike);
-            SetTransition(StageKind.Main, StageKind.Shooting);
-            SetTransition(StageKind.Main, StageKind.DeckStrategy);
-            SetTransition(StageKind.Main, StageKind.ExtractionShooter);
-            SetTransition(StageKind.Main, StageKind.Production);
+            // Main
+            SetTransition(Transition, StageKind.Roguelike);
+            SetTransition(Transition, StageKind.Shooting);
+            SetTransition(Transition, StageKind.DeckStrategy);
+            SetTransition(Transition, StageKind.ExtractionShooter);
+            SetTransition(Transition, StageKind.Production);
 
-            SetTransition(StageKind.Roguelike, StageKind.Main);
-            SetTransition(StageKind.Shooting, StageKind.Main);
-            SetTransition(StageKind.DeckStrategy, StageKind.Main);
-            SetTransition(StageKind.ExtractionShooter, StageKind.Main);
-            SetTransition(StageKind.Production, StageKind.Main);
+            AddTransitionToList(Transition);
+            Transition.Clear();
 
-            SetTransition(StageKind.Roguelike, StageKind.Intro);
-            SetTransition(StageKind.Shooting, StageKind.Intro);
-            SetTransition(StageKind.DeckStrategy, StageKind.Intro);
-            SetTransition(StageKind.ExtractionShooter, StageKind.Intro);
-            SetTransition(StageKind.Production, StageKind.Intro);
+            // Intro
+            SetTransition(Transition, StageKind.Main);
 
-            SetTransition(StageKind.Roguelike, StageKind.Production);
-            SetTransition(StageKind.Shooting, StageKind.Production);
-            SetTransition(StageKind.DeckStrategy, StageKind.Production);
-            SetTransition(StageKind.ExtractionShooter, StageKind.Production);
-            SetTransition(StageKind.Production, StageKind.Production);
+            AddTransitionToList(Transition);
+            Transition.Clear();
 
-            SetTransition(StageKind.Production, StageKind.Main);
-            SetTransition(StageKind.Production, StageKind.Roguelike);
-            SetTransition(StageKind.Production, StageKind.Shooting);
-            SetTransition(StageKind.Production, StageKind.DeckStrategy);
-            SetTransition(StageKind.Production, StageKind.ExtractionShooter);
-            SetTransition(StageKind.Production, StageKind.Production);
+            //Roguelike
+            SetTransition(Transition, StageKind.Main);
+            SetTransition(Transition, StageKind.Intro);
+            SetTransition(Transition, StageKind.Production);
+
+            AddTransitionToList(Transition);
+            Transition.Clear();
+
+            // Shooting
+            SetTransition(Transition, StageKind.Main);
+            SetTransition(Transition, StageKind.Intro);
+            SetTransition(Transition, StageKind.Production);
+
+            AddTransitionToList(Transition);
+            Transition.Clear();
+
+            // ExtractionShooter
+            SetTransition(Transition, StageKind.Main);
+            SetTransition(Transition, StageKind.Intro);
+            SetTransition(Transition, StageKind.Production);
+
+            AddTransitionToList(Transition);
+            Transition.Clear();
+
+            // Production
+            SetTransition(Transition, StageKind.Main);
+            SetTransition(Transition, StageKind.Intro);
+            SetTransition(Transition, StageKind.Production);
+            SetTransition(Transition, StageKind.Roguelike);
+            SetTransition(Transition, StageKind.Shooting);
+            SetTransition(Transition, StageKind.DeckStrategy);
+            SetTransition(Transition, StageKind.ExtractionShooter);
+            SetTransition(Transition, StageKind.Production);
+
+            AddTransitionToList(Transition);
+            Transition.Clear();
+
+            // DeckStrategy
+            SetTransition(Transition, StageKind.Main);
+            SetTransition(Transition, StageKind.Intro);
+            SetTransition(Transition, StageKind.Production);
+
+            AddTransitionToList(Transition);
+            Transition.Clear();
+
         }
 
-        private void SetTransition(StageKind from, StageKind to)
+        private void SetTransition(List<StageKind> from, StageKind to)
         {
-            int fromIndex = (int)from;  
+            from.Add(to);
+        }
 
-            if (transitionTable[fromIndex] == null)
-                transitionTable[fromIndex] = new List<bool>();
-
-            int toIndex = (int)to;
-
-            while (transitionTable[fromIndex].Count <= toIndex)
-                transitionTable[fromIndex].Add(false);
-
-            transitionTable[fromIndex][toIndex] = true;
+        private void AddTransitionToList(List<StageKind> from)
+        {
+            List<StageKind> list = new List<StageKind>(from);
+            transitionTable.Add(list);
         }
 
         // Stage 전환 
@@ -214,16 +242,10 @@ namespace Manager
         // Transition 검사
         private bool IsValidTransition(StageKind from, StageKind to)
         {
-            int fromIndex = (int)from;
-            int toIndex = (int)to;
+            if (transitionTable[(int)from - 1].Contains(to))
+                return true;
 
-            if (transitionTable[fromIndex] == null)
-                return false;  
-
-            if (transitionTable[fromIndex].Count <= toIndex)
-                return false;  
-
-            return transitionTable[fromIndex][toIndex];
+            return false;
         }
 
         /// Stage 전환 Coroutine
