@@ -58,6 +58,7 @@ namespace Manager
         protected override void LoadResources()
         {
             //resource = ResourceManager.Instance.Load...
+
         }
 
         protected override void GetDatas()
@@ -67,9 +68,23 @@ namespace Manager
 
         void SetAudioVolume(float value)
         {
-            Debug.LogFormat("VideoVolume : {0}", value);
-            SFX.volume = slider.value;
-            BGM.volume = slider.value;
+            Debug.LogFormat("SoundVolume : {0}", value);
+
+            Manager.SoundManager.Instance.SetBGMVolume(slider.value);
+            Manager.SoundManager.Instance.SetSFXVolume(slider.value);
+        }
+
+        public void PlaySFX()
+        {
+            Manager.SoundManager.Instance.PlaySFX(Manager.SoundSFXResourceType.Sample);
+        }
+        public void PlayBGM()
+        {
+            Manager.SoundManager.Instance.PlayBGM(Manager.SoundBGMResourceType.Sample);
+        }
+        public void StopBGM()
+        {
+            Manager.SoundManager.Instance.StopBGM();
         }
     }
 }

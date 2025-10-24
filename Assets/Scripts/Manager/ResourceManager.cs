@@ -40,30 +40,30 @@ namespace Manager
             return videoClip;
         }
 
-        public AudioSource LoadAudioBGM(SoundBGMResourceType type)
+        public AudioClip LoadAudioBGM(SoundBGMResourceType type)
         {
-            AudioSource audioSource = null;
+            AudioClip audioClip = null;
             //string path = "VideoClip/";
             switch (type)
             {
                 case SoundBGMResourceType.Sample:
-                    audioSource = LoadResource<AudioSource>("BGM/SampleBGM");
+                    audioClip = LoadResource<AudioClip>("BGM/SampleBGM");
                     break;
             }
-            return audioSource;
+            return audioClip;
         }
 
-        public AudioSource LoadAudioSFX(SoundSFXResourceType type)
+        public AudioClip LoadAudioSFX(SoundSFXResourceType type)
         {
-            AudioSource audioSource = null;
+            AudioClip audioClip = null;
             //string path = "VideoClip/";
             switch (type)
             {
                 case SoundSFXResourceType.Sample:
-                    audioSource = LoadResource<AudioSource>("SFX/SampleBGM");
+                    audioClip = LoadResource<AudioClip>("SFX/SampleSFX");
                     break;
             }
-            return audioSource;
+            return audioClip;
         }
 
         public BaseStaticData LoadStaticData(StageKind type)
