@@ -45,6 +45,7 @@ namespace Manager
         {
             LoadResources();
             GetDatas();
+
             yield return null;
         }
         public virtual IEnumerator OnStageStay()
@@ -77,7 +78,9 @@ namespace Manager
 
         protected BaseStaticData GetRuntimeData(BaseStage stage)
         {
-            // 추후 구현
+            BaseRuntimeData data = null;
+
+            data = Manager.DataManager.Instance.GetRuntimeData(stage.StageKind, (int)Define.StageType.Lobby);
 
             return null;
         }

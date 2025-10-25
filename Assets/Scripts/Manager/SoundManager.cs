@@ -1,9 +1,9 @@
-﻿using Manager;
+using Manager;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Manager
-{ 
+{
     public class SoundManager : Singleton<SoundManager>
     {
         [Header("Audio Source Prefabs")]
@@ -85,7 +85,7 @@ namespace Manager
         public void SetSFXVolume(float volume)
         {
             currentSFXVolume = volume;
-            
+
             foreach (KeyValuePair<string, List<AudioSource>> pair in activeSFX)
             {
                 foreach (AudioSource src in pair.Value)
@@ -97,4 +97,3 @@ namespace Manager
         }
     }
 }
-

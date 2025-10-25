@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEditor.Overlays;
 using UnityEditor.VersionControl;
 using UnityEngine;

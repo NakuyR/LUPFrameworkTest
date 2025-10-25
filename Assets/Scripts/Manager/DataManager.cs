@@ -6,6 +6,8 @@ using System.Resources;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UIElements;
+using System.IO;
+using UnityEngine;
 
 namespace Manager
 {
@@ -29,9 +31,23 @@ namespace Manager
             return data;
         }
 
-        public ScriptablePlayerData GetRuntimeData()
+        public BaseRuntimeData GetRuntimeData(StageKind stagekind, int stagetype)
         {
-            return null;
+            BaseRuntimeData data = null;
+
+            // 나중에 런타임데이터 스크립터블오브젝트가 들어가면 사용?
+            // data = ResourceManager.Instance.LoadRuntimeData(stagekind, stagetype);
+
+            // todo..
+            //data = JsonDataHelper.LoadData();
+
+            if (!data)
+            {
+                Debug.LogError($"Failed to load runtime data");
+                return null;
+            }
+
+            return data;
         }
 
         public override void Awake()
@@ -43,7 +59,7 @@ namespace Manager
 
         public void SaveRuntimeData(BaseRuntimeData runtimeData)
         {
-            
+
         }
     }
 }
