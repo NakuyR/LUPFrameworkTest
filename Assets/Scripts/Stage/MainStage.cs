@@ -66,6 +66,11 @@ namespace Manager
             
         }
 
+        protected override void SaveDatas()
+        {
+
+        }
+
         void SetAudioVolume(float value)
         {
             Debug.LogFormat("SoundVolume : {0}", value);

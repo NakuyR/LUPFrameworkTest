@@ -1,27 +1,26 @@
-﻿using Manager;
-using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
-using UnityEngine.Video;
+﻿using UnityEngine;
 using System.Collections;
+
 namespace Manager
 {
     public class RoguelikeStage : BaseStage
     {
-        public BaseStaticData data;
+        public BaseStaticData StaticData;
+        public BaseRuntimeData RuntimeData;
+
         public GameObject TestCharacter;
+
         protected override void Awake() 
         {
             base.Awake();
             StageKind = StageKind.Roguelike;
         }
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
 
         }
 
-        // Update is called once per frame
         void Update()
         {
 
@@ -36,12 +35,14 @@ namespace Manager
 
             yield return null;
         }
+
         public override IEnumerator OnStageStay()
         {
             yield return base.OnStageStay();
             //일단 납두기
             yield return null;
         }
+
         public override IEnumerator OnStageExit()
         {
             yield return base.OnStageExit();
@@ -50,6 +51,7 @@ namespace Manager
 
             yield return null;
         }
+
         protected override void LoadResources()
         {
             //resource = ResourceManager.Instance.Load...
@@ -57,9 +59,17 @@ namespace Manager
 
         protected override void GetDatas()
         {
-            data = base.GetStaticData(this);
+            StaticData = base.GetStaticData(this);
+            RuntimeData = base.GetRuntimeData(this);
         }
 
+        protected override void SaveDatas()
+        {
+            if(RuntimeData != null)
+            {
+                base.SaveRuntimeData(RuntimeData);
+            }
+        }
     }
 }
 

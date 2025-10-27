@@ -75,5 +75,32 @@ namespace Define
         InGame = 2,
         Result = 3
     }
+
+    public enum RuntimeDataType
+    {
+        RoguelikeRuntime,
+        ShootingRuntime,
+        DeckStrategyRuntime,
+        ExtractionShooterRuntime,
+        ProductionRuntime
+    }
+
+    public static class RuntimeDataTypes
+    {
+        public static string ToFilename(this RuntimeDataType type)
+        {
+            return type switch
+            {
+                RuntimeDataType.RoguelikeRuntime => "roguelike_runtime.json",
+                RuntimeDataType.ShootingRuntime => "shooting_runtime.json",
+                RuntimeDataType.DeckStrategyRuntime => "deckstrategy_runtime.json",
+                RuntimeDataType.ExtractionShooterRuntime => "extractionshooter_runtime.json",
+                RuntimeDataType.ProductionRuntime => "production_runtime.json"
+            };
+        }
+
+    }
+
+
 }
 

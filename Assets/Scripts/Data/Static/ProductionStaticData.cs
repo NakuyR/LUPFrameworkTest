@@ -1,17 +1,18 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[CreateAssetMenu(fileName = "RoguelikeStaticData", menuName = "Scriptable Objects/RoguelikeStaticData")]
-public class RoguelikeStaticData : BaseStaticData
+[CreateAssetMenu(fileName = "ProductionStaticData", menuName = "Scriptable Objects/ProductionStaticData")]
+public class ProductionStaticData : BaseStaticData
 {
-    protected override string URL => "https://docs.google.com/spreadsheets/d/11yM9l6g4opxVTflwsOVV0nZoIPUQ9VnA0rhkasLEi7I/export?format=csv&gid=2025045110";
-    
-    [Header("ìŠ¤í”„ë ˆë“œì‹œíŠ¸ì—ì„œ ì½í˜€ì ¸ ì§ë ¬í™” ëœ ì˜¤ë¸Œì íŠ¸")][SerializeField]
-    public List<RoguelikeScriptData> DataList = new List<RoguelikeScriptData>();
-    public List<RoguelikeScriptData> GetRoguelikeDataList() => DataList;
+    protected override string URL => "https://docs.google.com/spreadsheets/d/11yM9l6g4opxVTflwsOVV0nZoIPUQ9VnA0rhkasLEi7I/export?format=csv&gid=1925192426";
+
+    [Header("½ºÇÁ·¹µå½ÃÆ®¿¡¼­ ÀĞÇôÁ® Á÷·ÄÈ­ µÈ ¿ÀºêÁ§Æ®")]
+    [SerializeField]
+    public List<ProductionScriptData> DataList = new List<ProductionScriptData>();
+    public List<ProductionScriptData> GetDeckDataList() => DataList;
 
     public override List<object> GetDataList()
     {
@@ -26,10 +27,10 @@ public class RoguelikeStaticData : BaseStaticData
 
         if (int.TryParse(values[3].Trim(), out int gold))
         {
-            return new RoguelikeScriptData(name, desc, stat, gold);
+            return new ProductionScriptData(name, desc, stat, gold);
         }
 
-        Debug.LogWarning($"[RoguelikeStaticData] Failed to parse gold value: '{values[3]}'");
+        Debug.LogWarning($"[ProductionStaticData] Failed to parse gold value: '{values[3]}'");
         return null;
     }
 
@@ -40,18 +41,16 @@ public class RoguelikeStaticData : BaseStaticData
 
     protected override void AddToDataList(object data)
     {
-        if (data is RoguelikeScriptData rogueData)
+        if (data is ProductionScriptData productionData)
         {
-            DataList.Add(rogueData);
+            DataList.Add(productionData);
         }
     }
 
     public override IEnumerator LoadSheet()
     {
-
         UnityWebRequest www = UnityWebRequest.Get(URL);
         yield return www.SendWebRequest();
-
 
         if (www.result != UnityWebRequest.Result.Success)
         {
@@ -63,4 +62,3 @@ public class RoguelikeStaticData : BaseStaticData
         ParseSheet(csvData);
     }
 }
-

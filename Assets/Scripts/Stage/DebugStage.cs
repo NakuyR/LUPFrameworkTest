@@ -23,6 +23,11 @@ namespace Manager
         {
             //data = DataManager.Instance.GetData...
         }
+
+        protected override void SaveDatas()
+        {
+            
+        }
     }
 }
 

@@ -15,7 +15,6 @@ namespace Manager
 
         }
 
-        // Update is called once per frame
         void Update()
         {
 
@@ -32,14 +31,19 @@ namespace Manager
         Production = 7,  // 생산/건설/강화
         DeckStrategy = 8, // 덱 전략
          */
+
         public void LoadStage(int stage)
         {
             StageKind endStageKind = (StageKind)stage;
             StageManager.Instance.LoadStage(endStageKind);
         }
+
         protected abstract void LoadResources();
 
+        // 자식 클래스에서 각 게임에 걸맞는 변수에 데이터 삽입
         protected abstract void GetDatas();
+
+        protected abstract void SaveDatas();
 
         public virtual IEnumerator OnStageEnter()
         {
@@ -56,15 +60,13 @@ namespace Manager
         public virtual IEnumerator OnStageExit()
         {
             SaveDatas();
+
             yield return null;
         }
 
-        private void SaveDatas()
+        protected void SaveRuntimeData(BaseRuntimeData runtimeData)
         {
-            //foreach(RuntimeData data in datas)
-            //{
-            //    DataManager.Instance.SaveData(data);
-            //}
+            DataManager.Instance.SaveRuntimeData(runtimeData);
         }
 
         protected BaseStaticData GetStaticData(BaseStage stage)
@@ -76,13 +78,13 @@ namespace Manager
             return data;
         }
 
-        protected BaseStaticData GetRuntimeData(BaseStage stage)
+        protected BaseRuntimeData GetRuntimeData(BaseStage stage)
         {
             BaseRuntimeData data = null;
 
             data = Manager.DataManager.Instance.GetRuntimeData(stage.StageKind, (int)Define.StageType.Lobby);
 
-            return null;
+            return data;
         }
     }
 }

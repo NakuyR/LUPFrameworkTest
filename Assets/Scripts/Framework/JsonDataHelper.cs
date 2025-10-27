@@ -45,7 +45,29 @@ public static class JsonDataHelper
 
     private static string GetFilePath(string fileName)
     {
-        return Path.Combine(Application.persistentDataPath, fileName);
+        string basePath;
+
+        #if UNITY_EDITOR
+        // 개발 중: 프로젝트 폴더
+        basePath = Path.Combine(Application.dataPath, "../SaveData");
+        #else
+        // 출시 후: OS 표준 경로 추후 사용
+        basePath = Application.persistentDataPath;
+        #endif
+
+        // 폴더가 없으면 생성
+        if (!Directory.Exists(basePath))
+        {
+            Directory.CreateDirectory(basePath);
+        }
+
+        return Path.Combine(basePath, fileName);
+    }
+
+    public static bool FileExists(string fileName)
+    {
+        string path = GetFilePath(fileName);
+        return File.Exists(path);
     }
 }
 

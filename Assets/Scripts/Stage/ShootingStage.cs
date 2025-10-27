@@ -57,6 +57,11 @@ namespace Manager
         {
             //data = GetData...
         }
+
+        protected override void SaveDatas()
+        {
+
+        }
     }
 }
 
