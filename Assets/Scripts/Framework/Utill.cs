@@ -32,6 +32,7 @@ namespace Define
         ExtractionShooter = 6, // 익스트랙션 슈터
         Production = 7,  // 생산/건설/강화
         DeckStrategy = 8, // 덱 전략
+        Tutorial = 9, //튜토리얼
     }
 
     public enum StageType // 임시로 일단 이걸 사용해봤음

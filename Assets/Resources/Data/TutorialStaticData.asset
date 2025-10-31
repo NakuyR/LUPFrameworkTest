@@ -15,8 +15,15 @@ MonoBehaviour:
   associatedWorksheet: Tutorial
   START_ROW: 1
   DataList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - id: 1
+    description: "\uCE90\uB9AD\uD130 1\uBA85\uC758 \uB808\uBCA8\uC744 10\uAE4C\uC9C0
+      \uC62C\uB9AC\uC138\uC694."
+  - id: 2
+    description: "5\uAC1C\uC758 \uC11C\uB85C \uB2E4\uB978 \uAC8C\uC784 \uBAA8\uB4DC\uB97C
+      \uAC01\uAC01 1\uD68C\uC529 \uD50C\uB808\uC774\uD558\uC138\uC694."
+  - id: 3
+    description: "\uC870\uC774\uC2A4\uD2F1\uC73C\uB85C \uCE90\uB9AD\uD130 \uC774\uB3D9\uD558\uC138\uC694."
+  - id: 4
+    description: "\uC801 \uCC98\uCE58\uB85C \uACBD\uD5D8\uCE58 \uD68D\uB4DD\uD558\uC138\uC694."
+  - id: 5
+    description: "\uCE90\uB9AD\uD130 \uB9AC\uC2A4\uD2B8 \uD655\uC778\uD558\uC138\uC694."

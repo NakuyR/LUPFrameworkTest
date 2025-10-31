@@ -15,7 +15,6 @@ public abstract class BaseRuntimeData
     private static MonoBehaviour coroutineRunner;
     private Coroutine saveCoroutine;
     private float saveDelay = 0.5f;  // 0.5초 후 저장
-
     public static void SetCoroutineRunner(MonoBehaviour runner)
     {
         coroutineRunner = runner;

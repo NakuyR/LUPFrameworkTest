@@ -804,7 +804,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1005737954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Manager.MainStage, Assembly-CSharp
         m_MethodName: StopBGM
         m_Mode: 1
@@ -1077,6 +1077,7 @@ GameObject:
   - component: {fileID: 899452751}
   - component: {fileID: 899452753}
   - component: {fileID: 899452752}
+  - component: {fileID: 899452754}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -1142,6 +1143,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 899452750}
   m_CullTransparentMesh: 1
+--- !u!114 &899452754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899452750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1270b8a6417bb34aa1721cc3cf4603a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts: []
+  textIndex: 0
+  text: {fileID: 1439964843}
 --- !u!1 &1005737953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005737955}
-  - component: {fileID: 1005737954}
+  - component: {fileID: 1005737956}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -1159,23 +1175,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1005737954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005737953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b525a458c2f07bb42aaae9d4f257ba1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StageKind: 2
-  SFX: {fileID: 0}
-  BGM: {fileID: 0}
-  soundVolume: 0
-  slider: {fileID: 1717568592}
 --- !u!4 &1005737955
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,6 +1190,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1005737956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005737953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbae5ff0561b2845910af189eda55df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageKind: 2
 --- !u!1 &1391082595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,7 +1619,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1005737954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Manager.MainStage, Assembly-CSharp
         m_MethodName: PlayBGM
         m_Mode: 1
@@ -1740,7 +1752,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1005737954}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Manager.MainStage, Assembly-CSharp
         m_MethodName: PlaySFX
         m_Mode: 1

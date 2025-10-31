@@ -74,6 +74,9 @@ namespace Manager
                 case Define.StageKind.Main:
                     data = Resources.Load<BaseStaticData>("Data/ProductionStaticData");
                     break;
+                case Define.StageKind.Tutorial:
+                    data = Resources.Load<BaseStaticData>("Data/TutorialStaticData");
+                    break;
             }
             return data;
         }
