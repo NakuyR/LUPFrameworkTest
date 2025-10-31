@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SampleCharacter : MonoBehaviour
 {
+    [SerializeField]
     private RoguelikeRuntimeData runtimedata;
 
     //public string name;
