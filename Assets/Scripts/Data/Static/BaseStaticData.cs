@@ -1,89 +1,184 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BaseStaticData", menuName = "Scriptable Objects/BaseStaticData")]
 public abstract class BaseStaticData : ScriptableObject
 {
     protected abstract string URL { get; }
-    public abstract List<object> GetDataList();
 
     [Header("스프레드 시트의 시트 이름")][SerializeField] public string associatedWorksheet = "";
     [Header("읽기 시작할 행 번호")][SerializeField] public int START_ROW = 1;
 
     public abstract IEnumerator LoadSheet();
+}
 
-    // 각 자식 클래스가 구현해야 할 메서드들
-    protected abstract object ParseDataRow(string[] values);
-    protected abstract void ClearDataList();
-    protected abstract void AddToDataList(object data);
+public abstract class BaseStaticData<T> : BaseStaticData where T : new()
+{
+    [Header("스프레드시트에서 읽혀져 직렬화 된 오브젝트")][SerializeField]
+    public List<T> DataList = new List<T>();
+
+    public List<T> GetDataList() => DataList;
 
     protected void ParseSheet(string csvData)
     {
         Debug.Log($"[{GetType().Name}] ParseSheet called with {csvData.Length} chars");
+        Debug.Log($"[{GetType().Name}] START_ROW = {START_ROW}");
 
-        string[] lines = csvData.Split('\n');
+        // CSV 파서 사용 (따옴표 안의 쉼표/개행 처리)
+        string[] lines = CSVParser.SplitLines(csvData);
         Debug.Log($"[{GetType().Name}] Split into {lines.Length} lines");
 
-        if (lines.Length < 2)
+        // START_ROW는 1-based, 배열은 0-based이므로 -1 필요
+        int headerIndex = START_ROW - 1;
+
+        if (lines.Length <= headerIndex)
         {
-            Debug.LogWarning($"[{GetType().Name}] Not enough lines in CSV (need at least 2)");
+            Debug.LogWarning($"[{GetType().Name}] Not enough lines in CSV (have {lines.Length}, need at least {headerIndex + 1})");
             return;
         }
 
-        string[] headers = lines[0].Split(',');
-        Debug.Log($"[{GetType().Name}] Headers: {string.Join(", ", headers)}");
+        // START_ROW에서 헤더 읽기
+        string[] headers = CSVParser.ParseLine(lines[headerIndex]);
+        Debug.Log($"[{GetType().Name}] Headers from row {START_ROW} (index {headerIndex}): {string.Join(", ", headers)}");
 
+        Dictionary<string, int> headerMap = new Dictionary<string, int>();
         for (int i = 0; i < headers.Length; i++)
-            headers[i] = headers[i].Trim();
+        {
+            string headerName = headers[i].Trim();
+            headerMap[headerName] = i;
+        }
 
-        ClearDataList();
+        DataList.Clear();
 
         int successCount = 0;
         int failCount = 0;
 
-        for (int i = START_ROW; i < lines.Length; i++)
+        // START_ROW + 1부터 데이터 읽기 (헤더 다음 행부터)
+        for (int i = headerIndex + 1; i < lines.Length; i++)
         {
             if (string.IsNullOrWhiteSpace(lines[i]))
                 continue;
 
-            string[] values = lines[i].Split(',');
+            // CSV 파서 사용 (따옴표로 감싸진 필드 처리)
+            string[] values = CSVParser.ParseLine(lines[i]);
 
-            if (values.Length >= 4)
+            try
             {
-                try
+                T data = ParseDataRow(values, headerMap);
+                if (data != null)
                 {
-                    object data = ParseDataRow(values);
-                    if (data != null)
-                    {
-                        AddToDataList(data);
-                        successCount++;
-                    }
-                    else
-                    {
-                        failCount++;
-                    }
+                    DataList.Add(data);
+                    successCount++;
                 }
-                catch (System.Exception e)
+                else
                 {
-                    Debug.LogWarning($"[{GetType().Name}] Failed to parse line {i}: {e.Message}");
                     failCount++;
                 }
             }
-            else
+            catch (System.Exception e)
             {
-                Debug.LogWarning($"[{GetType().Name}] Line {i} has only {values.Length} values (need 4)");
+                Debug.LogWarning($"[{GetType().Name}] Failed to parse line {i}: {e.Message}");
                 failCount++;
             }
         }
 
-        Debug.Log($"[{GetType().Name}] Loaded {GetDataList().Count} entries (Success: {successCount}, Failed: {failCount})");
+        Debug.Log($"[{GetType().Name}] Loaded {DataList.Count} entries (Success: {successCount}, Failed: {failCount})");
+    }
+
+    protected virtual T ParseDataRow(string[] values, Dictionary<string, int> headerMap)
+    {
+        T instance = new T();
+        FieldInfo[] fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+        foreach (FieldInfo field in fields)
+        {
+            ColumnAttribute columnAttr = field.GetCustomAttribute<ColumnAttribute>();
+
+            if (columnAttr == null)
+                continue;
+
+            string headerName = columnAttr.HeaderName;
+
+            if (!headerMap.ContainsKey(headerName))
+            {
+                if (columnAttr.Required)
+                {
+                    Debug.LogWarning($"[{GetType().Name}] Required column '{headerName}' not found in headers");
+                }
+                continue;
+            }
+
+            int columnIndex = headerMap[headerName];
+
+            if (columnIndex >= values.Length)
+            {
+                Debug.LogWarning($"[{GetType().Name}] Column '{headerName}' index {columnIndex} out of range (values length: {values.Length})");
+                continue;
+            }
+
+            string value = values[columnIndex].Trim();
+
+            try
+            {
+                // 타입별 파싱
+                if (field.FieldType == typeof(string))
+                {
+                    field.SetValue(instance, value);
+                }
+                else if (field.FieldType == typeof(int))
+                {
+                    if (int.TryParse(value, out int intValue))
+                        field.SetValue(instance, intValue);
+                    else
+                        Debug.LogWarning($"[{GetType().Name}] Failed to parse '{value}' as int for field '{field.Name}'");
+                }
+                else if (field.FieldType == typeof(float))
+                {
+                    if (float.TryParse(value, out float floatValue))
+                        field.SetValue(instance, floatValue);
+                    else
+                        Debug.LogWarning($"[{GetType().Name}] Failed to parse '{value}' as float for field '{field.Name}'");
+                }
+                else if (field.FieldType == typeof(bool))
+                {
+                    if (bool.TryParse(value, out bool boolValue))
+                        field.SetValue(instance, boolValue);
+                    else
+                        Debug.LogWarning($"[{GetType().Name}] Failed to parse '{value}' as bool for field '{field.Name}'");
+                }
+                else if (field.FieldType == typeof(double))
+                {
+                    if (double.TryParse(value, out double doubleValue))
+                        field.SetValue(instance, doubleValue);
+                    else
+                        Debug.LogWarning($"[{GetType().Name}] Failed to parse '{value}' as double for field '{field.Name}'");
+                }
+                else if (field.FieldType == typeof(long))
+                {
+                    if (long.TryParse(value, out long longValue))
+                        field.SetValue(instance, longValue);
+                    else
+                        Debug.LogWarning($"[{GetType().Name}] Failed to parse '{value}' as long for field '{field.Name}'");
+                }
+                else
+                {
+                    Debug.LogWarning($"[{GetType().Name}] Unsupported field type: {field.FieldType} for field '{field.Name}'");
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"[{GetType().Name}] Failed to set field '{field.Name}': {e.Message}");
+            }
+        }
+
+        return instance;
     }
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(BaseStaticData), true)]  
+[CustomEditor(typeof(BaseStaticData), true)]
 public class BaseStaticDataReaderEditor : Editor
 {
     BaseStaticData data;
