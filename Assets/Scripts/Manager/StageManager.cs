@@ -23,6 +23,7 @@ namespace Manager
         private CanvasGroup fadeCanvas;
         [SerializeField] private float fadeDuration = 1f;
 
+        [Header("건들지 마세요!!!")]
         [SerializeField] private Define.StageKind currentStage;
 
         private BaseStage currentStageInstance;

@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StageKind: 1
-  TargetStage: 4
+  TargetStage: 8
 --- !u!1 &1326850576
 GameObject:
   m_ObjectHideFlags: 0

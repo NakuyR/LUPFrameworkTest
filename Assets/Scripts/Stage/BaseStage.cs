@@ -32,10 +32,9 @@ namespace Manager
         DeckStrategy = 8, // 덱 전략
          */
 
-        public void LoadStage(int stage)
+        public void LoadStage(Define.StageKind stage)
         {
-            Define.StageKind endStageKind = (Define.StageKind)stage;
-            StageManager.Instance.LoadStage(endStageKind);
+            StageManager.Instance.LoadStage(stage);
         }
 
         protected abstract void LoadResources();
