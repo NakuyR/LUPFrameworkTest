@@ -7,7 +7,7 @@ namespace Manager
         [SerializeField]
         BaseStaticData data;
 
-        public BaseStaticData GetStaticData(StageKind stagekind, int stagetype)
+        public BaseStaticData GetStaticData(Define.StageKind stagekind, int stagetype)
         {
             BaseStaticData data = null;
 
@@ -22,7 +22,7 @@ namespace Manager
             return data;
         }
 
-        public BaseRuntimeData GetRuntimeData(StageKind stagekind, int stagetype)
+        public BaseRuntimeData GetRuntimeData(Define.StageKind stagekind, int stagetype)
         {
             BaseRuntimeData data = null;
 
@@ -34,7 +34,7 @@ namespace Manager
 
             switch (stagekind)
             {
-                case StageKind.Roguelike:
+                case Define.StageKind.Roguelike:
                     filename = Define.RuntimeDataTypes.ToFilename(Define.RuntimeDataType.RoguelikeRuntime);
                     data = JsonDataHelper.LoadData<RoguelikeRuntimeData>(filename);
                     break;

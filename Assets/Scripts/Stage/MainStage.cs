@@ -18,7 +18,7 @@ namespace Manager
         protected override void Awake() 
         {
             base.Awake();
-            StageKind = StageKind.Main;
+            StageKind = Define.StageKind.Main;
         }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -81,11 +81,11 @@ namespace Manager
 
         public void PlaySFX()
         {
-            Manager.SoundManager.Instance.PlaySFX(Manager.SoundSFXResourceType.Sample);
+            Manager.SoundManager.Instance.PlaySFX(Define.SoundSFXResourceType.Sample);
         }
         public void PlayBGM()
         {
-            Manager.SoundManager.Instance.PlayBGM(Manager.SoundBGMResourceType.Sample);
+            Manager.SoundManager.Instance.PlayBGM(Define.SoundBGMResourceType.Sample);
         }
         public void StopBGM()
         {

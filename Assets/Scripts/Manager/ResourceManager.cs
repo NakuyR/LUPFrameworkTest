@@ -4,18 +4,6 @@ using UnityEngine.Video;
 
 namespace Manager
 {
-    public enum VideoResourceType
-    {
-        Sample,
-    }
-    public enum SoundBGMResourceType
-    {
-        Sample,
-    }
-    public enum SoundSFXResourceType
-    {
-        Sample,
-    }
     public class ResourceManager : Singleton<ResourceManager>
     {
         private static Dictionary<string, Object> _cache = new();
@@ -27,12 +15,12 @@ namespace Manager
             return obj;
         }
 
-        public VideoClip LoadVideoClip(VideoResourceType type)
+        public VideoClip LoadVideoClip(Define.VideoResourceType type)
         {
             VideoClip videoClip = null;
             //string path = "VideoClip/";
             switch (type) { 
-            case VideoResourceType.Sample:
+            case Define.VideoResourceType.Sample:
                     //videoClip = LoadResource<VideoClip>(path+"/SampleVideo");
                     videoClip = LoadResource<VideoClip>("VideoClip/SampleVideo");
                     break;
@@ -40,50 +28,50 @@ namespace Manager
             return videoClip;
         }
 
-        public AudioClip LoadAudioBGM(SoundBGMResourceType type)
+        public AudioClip LoadAudioBGM(Define.SoundBGMResourceType type)
         {
             AudioClip audioClip = null;
             //string path = "VideoClip/";
             switch (type)
             {
-                case SoundBGMResourceType.Sample:
+                case Define.SoundBGMResourceType.Sample:
                     audioClip = LoadResource<AudioClip>("BGM/SampleBGM");
                     break;
             }
             return audioClip;
         }
 
-        public AudioClip LoadAudioSFX(SoundSFXResourceType type)
+        public AudioClip LoadAudioSFX(Define.SoundSFXResourceType type)
         {
             AudioClip audioClip = null;
             //string path = "VideoClip/";
             switch (type)
             {
-                case SoundSFXResourceType.Sample:
+                case Define.SoundSFXResourceType.Sample:
                     audioClip = LoadResource<AudioClip>("SFX/SampleSFX");
                     break;
             }
             return audioClip;
         }
 
-        public BaseStaticData LoadStaticData(StageKind type, int stagetype)
+        public BaseStaticData LoadStaticData(Define.StageKind type, int stagetype)
         {
             BaseStaticData data = null;
             switch (type)
             {
-                case Manager.StageKind.Shooting:
+                case Define.StageKind.Shooting:
                     data = Resources.Load<BaseStaticData>("Data/ShootingStaticData");
                     break;
-                case Manager.StageKind.DeckStrategy:
+                case Define.StageKind.DeckStrategy:
                     data = Resources.Load<BaseStaticData>("Data/DeckStrategyStaticData");
                     break;
-                case Manager.StageKind.ExtractionShooter:
+                case Define.StageKind.ExtractionShooter:
                     data = Resources.Load<BaseStaticData>("Data/ExtractionShooterStaticData");
                     break;
-                case Manager.StageKind.Roguelike:
+                case Define.StageKind.Roguelike:
                     data = Resources.Load<BaseStaticData>("Data/RoguelikeStaticData");
                     break;
-                case Manager.StageKind.Main:
+                case Define.StageKind.Main:
                     data = Resources.Load<BaseStaticData>("Data/ProductionStaticData");
                     break;
             }

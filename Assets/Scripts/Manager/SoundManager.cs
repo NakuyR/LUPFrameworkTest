@@ -1,4 +1,4 @@
-using Manager;
+﻿using Manager;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace Manager
         private Dictionary<string, List<AudioSource>> activeSFX = new(); //재생중인 효과음 목록
 
         Vector3 zeroVector = Vector3.zero;
-        public void PlayBGM(SoundBGMResourceType bgmtype, bool loop = true)
+        public void PlayBGM(Define.SoundBGMResourceType bgmtype, bool loop = true)
         {
             AudioClip clip = ResourceManager.Instance.LoadAudioBGM(bgmtype);
             if (clip == null)
@@ -38,14 +38,7 @@ namespace Manager
             bgmSource.Stop();
         }
 
-        //재생위치 신경 안써도 될 때 사용
-        public void PlaySFX(SoundSFXResourceType sfxtype)
-        {
-            PlaySFX(sfxtype, Vector3.zero, false);
-        }
-
-        //재생 위치 설정 필요
-        public void PlaySFX(SoundSFXResourceType sfxtype, Vector3 position, bool spatial = true)
+        public void PlaySFX(Define.SoundSFXResourceType sfxtype, GameObject gameobject = null, bool spatial = true)
         {
             AudioClip clip = ResourceManager.Instance.LoadAudioSFX(sfxtype);
             if (clip == null)
@@ -62,9 +55,16 @@ namespace Manager
 
             if (list.Count >= maxSameSFXCount)
                 return; // 너무 많으면 재생 안 함
+            AudioSource newSFX;
 
-            // 새로운 AudioSource 생성
-            AudioSource newSFX = Instantiate(sfxPrefab, position, Quaternion.identity);
+            if (gameobject == null)
+            {
+                newSFX = Instantiate(sfxPrefab, Vector3.zero, Quaternion.identity);
+            }
+            else
+            {
+                newSFX = Instantiate(sfxPrefab, gameobject.transform.position, Quaternion.identity);
+            }
             newSFX.clip = clip;
             newSFX.volume = currentSFXVolume;
             newSFX.spatialBlend = spatial ? 1f : 0f; // 3D/2D 전환

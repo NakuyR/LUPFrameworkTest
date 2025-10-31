@@ -35,7 +35,7 @@ namespace Manager
         }
         void Awake()
         {
-            StageKind = StageKind.Intro;
+            StageKind = Define.StageKind.Intro;
         }
         private void Start()
         {
@@ -68,7 +68,7 @@ namespace Manager
 
         protected override void LoadResources()
         {
-            clip = ResourceManager.Instance.LoadVideoClip(VideoResourceType.Sample);
+            clip = ResourceManager.Instance.LoadVideoClip(Define.VideoResourceType.Sample);
             //resource = ResourceManager.Instance.Load...
         }
 

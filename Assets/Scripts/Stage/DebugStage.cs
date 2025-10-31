@@ -5,7 +5,7 @@ namespace Manager
 {
     public class DebugStage : BaseStage
     {
-        public StageKind TargetStage = StageKind.Main;
+        public Define.StageKind TargetStage = Define.StageKind.Main;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()

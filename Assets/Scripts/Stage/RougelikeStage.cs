@@ -13,7 +13,7 @@ namespace Manager
         protected override void Awake() 
         {
             base.Awake();
-            StageKind = StageKind.Roguelike;
+            StageKind = Define.StageKind.Roguelike;
         }
 
         void Start()
