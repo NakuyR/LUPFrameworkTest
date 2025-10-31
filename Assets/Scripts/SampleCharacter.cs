@@ -7,10 +7,12 @@ public class SampleCharacter : MonoBehaviour
 {
     private RoguelikeRuntimeData runtimedata;
 
-    public string name;
-    public string description;
-    public string stat;
-    public int gold;
+    //public string name;
+    //public string description;
+    //public string stat;
+    //public int gold;
+
+    public RoguelikeScriptData characterdata;
 
     void Awake()
     {
@@ -19,12 +21,12 @@ public class SampleCharacter : MonoBehaviour
         {
             RoguelikeStaticData staticdata = (RoguelikeStaticData)stage.StaticData;
             RoguelikeRuntimeData runtimeData = (RoguelikeRuntimeData)stage.RuntimeData;
-            List<RoguelikeScriptData> datalist = staticdata.GetRoguelikeDataList();
+            List<RoguelikeScriptData> datalist = staticdata.GetDataList();
 
-            name = datalist[0].name;
-            description = datalist[0].description;
-            stat = datalist[0].stat;
-            gold = datalist[0].gold;
+            characterdata.name = datalist[0].name;
+            characterdata.description = datalist[0].description;
+            characterdata.stat = datalist[0].stat;
+            characterdata.gold = datalist[0].gold;
 
             runtimedata = runtimeData;
         }

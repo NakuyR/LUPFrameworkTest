@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -25,23 +26,30 @@ public abstract class BaseRuntimeData
         saveDelay = delay;
     }
 
+    protected void SetValue<T>(ref T field, T value)
+    {
+        if (!EqualityComparer<T>.Default.Equals(field, value))
+        {
+            field = value;
+            NotifyValueChanged();
+        }
+    }
+
     protected void NotifyValueChanged()
     {
         OnValueChanged?.Invoke();
-        SaveData();  
+        SaveData();
     }
 
     public abstract void ResetData();
 
     public void SaveData()
     {
-        // 기존 저장 예약 취소
         if (saveCoroutine != null && coroutineRunner != null)
         {
             coroutineRunner.StopCoroutine(saveCoroutine);
         }
 
-        // 새 저장 예약
         if (coroutineRunner != null)
         {
             saveCoroutine = coroutineRunner.StartCoroutine(SaveAfterDelay());

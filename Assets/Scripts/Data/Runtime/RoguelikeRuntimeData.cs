@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 [Serializable]
@@ -10,27 +10,13 @@ public class RoguelikeRuntimeData : BaseRuntimeData
     public int id
     {
         get => _id;
-        set
-        {
-            if (_id != value)
-            {
-                _id = value;
-                NotifyValueChanged();  // 자동 저장 트리거
-            }
-        }
+        set => SetValue(ref _id, value);
     }
 
     public string name
     {
         get => _name;
-        set
-        {
-            if (_name != value)
-            {
-                _name = value;
-                NotifyValueChanged();  // 자동 저장 트리거
-            }
-        }
+        set => SetValue(ref _name, value);
     }
 
     public override void ResetData()

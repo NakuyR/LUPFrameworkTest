@@ -1,16 +1,8 @@
 ﻿[System.Serializable]
 public class ShootingScriptData
 {
-    public string name;
-    public string description;
-    public string stat;
-    public int cur;
-
-    public ShootingScriptData(string name, string description, string stat, int cur)
-    {
-        this.name = name;
-        this.description = description;
-        this.stat = stat;
-        this.cur = cur;
-    }
+    [Column("name")] public string name;
+    [Column("description")] public string description;
+    [Column("stat")] public string stat;
+    [Column("gold")] public int gold;
 }
