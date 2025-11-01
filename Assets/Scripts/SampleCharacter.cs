@@ -1,17 +1,11 @@
 ﻿using Manager;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class SampleCharacter : MonoBehaviour
 {
     [SerializeField]
     private RoguelikeRuntimeData runtimedata;
-
-    //public string name;
-    //public string description;
-    //public string stat;
-    //public int gold;
 
     public RoguelikeScriptData characterdata;
 
